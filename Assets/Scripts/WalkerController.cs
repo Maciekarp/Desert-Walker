@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkerControler : MonoBehaviour
+public class WalkerController : MonoBehaviour
 {
     [SerializeField] private float speed = 1f; // speed of the whole walker
     [SerializeField] private float footAdjustSpeed = 1f; // speed at which the walker adjusts its feet

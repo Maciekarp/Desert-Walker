@@ -14,8 +14,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float minAngle = 10f;
     [SerializeField] private float maxAngle = 120f;
 
+
     private float distance;
-    private Vector3 center;
     private Vector3 up;
 
     private float angleVert;
@@ -23,7 +23,7 @@ public class CameraMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        center = new Vector3(0, 0, 0);
+        //center = new Vector3(0, 0, 0);
         up = new Vector3(0, 1, 0);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

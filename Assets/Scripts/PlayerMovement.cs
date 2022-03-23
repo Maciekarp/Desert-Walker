@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionStay(Collision other) {
         canJump = true;
         state = "onGround";
-        playerRB.useGravity = false;
+        //playerRB.useGravity = false;
         // state = "climbing";
     }
 
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             canJump = canInfiniteJump;
             state = "falling";
         }
-        playerRB.useGravity = true;
+        //playerRB.useGravity = true;
 
     }
 
