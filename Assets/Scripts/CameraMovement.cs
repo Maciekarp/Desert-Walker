@@ -14,6 +14,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float minAngle = 10f;
     [SerializeField] private float maxAngle = 120f;
 
+    [SerializeField] private LayerMask IgnoreLayers;
 
     private float distance;
     private Vector3 up;
@@ -38,7 +39,7 @@ public class CameraMovement : MonoBehaviour
         // zoom in and out clamping to max distance and any object between the camera player
         scale = Mathf.Clamp(scale + (Time.deltaTime * scaleSpeed * -Input.mouseScrollDelta.y), minScale, maxScale); 
         RaycastHit hit;
-        if(Physics.Raycast(parentTrans.position, transform.position - parentTrans.position, out hit, scale)){
+        if(Physics.Raycast(parentTrans.position, transform.position - parentTrans.position, out hit, scale, ~IgnoreLayers)){
             transform.localPosition = transform.localPosition.normalized * hit.distance;
         } else {
             transform.localPosition = transform.localPosition.normalized * scale;
