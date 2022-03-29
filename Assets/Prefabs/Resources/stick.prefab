@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1070165268228416141}
   - component: {fileID: 4140538901216898344}
   - component: {fileID: 2203053483675408866}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: stick Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 401432832075331639}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8794967066205780343}
   m_RootOrder: 0
@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401432832075331639}
-  m_Mesh: {fileID: 3390558720134950976, guid: 5f0b9dab897da1f419cbbb203b00f6ed, type: 3}
+  m_Mesh: {fileID: -1077405156741824939, guid: 5f0b9dab897da1f419cbbb203b00f6ed, type: 3}
 --- !u!23 &2203053483675408866
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fba55dfb84063b479ff73bbf378f754, type: 2}
+  - {fileID: 2100000, guid: 49c14477af6c1c44abf6d759354266a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +124,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8162263457220273101}
-  m_Mesh: {fileID: 3390558720134950976, guid: 5f0b9dab897da1f419cbbb203b00f6ed, type: 3}
+  m_Mesh: {fileID: -4224193870148154796, guid: 5f0b9dab897da1f419cbbb203b00f6ed, type: 3}
 --- !u!23 &7658040412462613016
 MeshRenderer:
   m_ObjectHideFlags: 0
