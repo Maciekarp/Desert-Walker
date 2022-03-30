@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7658040412462613016}
   - component: {fileID: 8162263457220273100}
   - component: {fileID: 8162263457220273103}
+  - component: {fileID: 789321552580163895}
   m_Layer: 7
   m_Name: stick
   m_TagString: Untagged
@@ -194,3 +195,15 @@ CapsuleCollider:
   m_Height: 1.01
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.04}
+--- !u!114 &789321552580163895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162263457220273101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ebd31d05c27d34db8a28189c264b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
