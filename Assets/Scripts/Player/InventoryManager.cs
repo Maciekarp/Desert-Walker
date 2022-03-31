@@ -65,7 +65,7 @@ public class InventoryManager : MonoBehaviour {
 
                 if(itemType != "") {
                     GameObject prefab = itemList.GetItemPrefab(itemType);
-                    Instantiate(prefab, dropLocation.position, transform.rotation);
+                    Instantiate(prefab, dropLocation.position, dropLocation.rotation);
                 }
             }
         }
