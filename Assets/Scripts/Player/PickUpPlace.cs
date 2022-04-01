@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpPlace : MonoBehaviour {
+    // Layers that should be tracked as interactable
+    [SerializeField] private LayerMask mask;
+
     // list of objects in players pick up area
     private List<GameObject> canPickUp;
 
@@ -13,11 +16,15 @@ public class PickUpPlace : MonoBehaviour {
 
     // When an object get in the spot allows it to be picked up
     void OnTriggerEnter(Collider other) {
-        canPickUp.Add(other.gameObject);
+        if ((mask.value & (1 << other.transform.gameObject.layer)) > 0) {
+            canPickUp.Add(other.gameObject);
+        }
     }
     
     void OnTriggerExit(Collider other) {
-        canPickUp.Remove(other.gameObject);
+        if ((mask.value & (1 << other.transform.gameObject.layer)) > 0) {
+            canPickUp.Remove(other.gameObject);
+        }
     }
 
     // used to interact with an object will return empty if no objects exist in area
@@ -26,5 +33,9 @@ public class PickUpPlace : MonoBehaviour {
             return canPickUp[0];
         }
         return null;
+    }
+
+    public void RemoveItem(GameObject obj) {
+        canPickUp.Remove(obj);
     }
 }

@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerRB;
     private Vector3 upVect;
     
+    // Change in movement caused by surface attached to 
+    private Vector3 deltaSurf;
+
     private string state = "falling";
 
     private bool canJump = true;
@@ -26,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
         upVect = new Vector3(0, 1, 0);
         canJump = true;
+        deltaSurf = Vector3.zero;
     }
 
     void OnCollisionEnter(Collision other) {
@@ -52,6 +56,12 @@ public class PlayerMovement : MonoBehaviour
         }
         //playerRB.useGravity = true;
 
+    }
+
+
+    // Returns the amount moved by surface attached to
+    public Vector3 DeltaSurf() {
+        return deltaSurf;
     }
 
     // Update is called once per frame
@@ -82,15 +92,14 @@ public class PlayerMovement : MonoBehaviour
                 (rightVect * (horizontal * speed * Time.deltaTime)) +
                 new Vector3(0, playerRB.velocity.y, 0);
         }
-    }
-    
-    
-    // follows movement of surface
-    void LateUpdate() {
+
+        // Follows movement of surface
         if(surface != null) {
-            transform.position += (surface.transform.position - surfacePrevPos);
+            deltaSurf = (surface.transform.position - surfacePrevPos);
+            transform.position += deltaSurf;
             surfacePrevPos = surface.transform.position;
+        } else {
+            deltaSurf = Vector3.zero;
         }
     }
-    
 }

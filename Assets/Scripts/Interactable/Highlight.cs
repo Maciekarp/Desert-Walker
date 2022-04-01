@@ -5,6 +5,7 @@ using UnityEngine;
 public class Highlight : MonoBehaviour
 {
     [SerializeField] private GameObject highlight;
+    [SerializeField] private LayerMask mask;
 
     // Start is called before the first frame update
     void Start() {
@@ -12,10 +13,14 @@ public class Highlight : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        highlight.SetActive(true);
+        if ((mask.value & (1 << other.transform.gameObject.layer)) > 0) {
+            highlight.SetActive(true);
+        }
     }
 
     void OnTriggerExit(Collider other) {
-        highlight.SetActive(false);
+        if ((mask.value & (1 << other.transform.gameObject.layer)) > 0) {
+            highlight.SetActive(false);
+        }
     }
 }

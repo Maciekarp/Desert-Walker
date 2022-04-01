@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8162263457220273100}
   - component: {fileID: 8162263457220273103}
   - component: {fileID: 789321552580163895}
+  - component: {fileID: 3777182570883142400}
   m_Layer: 7
   m_Name: stick
   m_TagString: Untagged
@@ -181,6 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 401432832075331639}
+  mask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!136 &8162263457220273103
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -208,3 +212,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: stick
+--- !u!114 &3777182570883142400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162263457220273101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93bcb6a788bb9645b769d2c7f524522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  fallSpeed: 5
+  maxDist: 0.1

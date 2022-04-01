@@ -47,10 +47,23 @@ public class InventoryManager : MonoBehaviour {
                 // do stuff specific to the object being interacted with
                 InteractInfo info = obj.GetComponent(typeof(InteractInfo)) as InteractInfo;
                 if(info == null) {
+                    // Do nothing
                     Debug.LogAssertion("object: " + obj + "\nhas no InteractInfo component!");
                 } else {
-                    if(info.GetObjectType() == "stick") {
-                        // Try to pick up stick
+                    
+                    // if item exists in list add to backpack in first open slot
+                    if(itemList.GetItemPrefab(info.GetObjectType()) != null) {
+                        foreach(SlotManager slot in backPackSlots) {
+                            // checks if there is an empty slot
+                            if(slot.GetState() == "") {
+                                slot.SetSlot(info.GetObjectType());
+                                pickPlace.RemoveItem(obj);
+                                Destroy(obj);
+                                break;
+                            }
+                        }
+                    } else {
+                        Debug.LogAssertion("Interactable Object is not an item");
                     }
                 }
             }
