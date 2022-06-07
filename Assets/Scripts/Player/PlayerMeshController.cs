@@ -24,7 +24,7 @@ public class PlayerMeshController : MonoBehaviour
         }
         transform.rotation = Quaternion.Lerp(
             transform.rotation,
-            Quaternion.LookRotation(dir, Vector3.up),
+            Quaternion.LookRotation(dir, Vector3.up),// * Quaternion.Euler(-90, 0, 0),
             Time.deltaTime * turnSpeed
         );
         prevPos = transform.position;

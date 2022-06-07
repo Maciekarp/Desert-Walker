@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform camTrans;
 
+    [SerializeField] private Animator animator;
+
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpStrength = 5f;
     [SerializeField] private float climbSpeed = 10f;
@@ -72,9 +74,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forwardVect = Vector3.Normalize(this.transform.position - camTrans.position);
         forwardVect = new Vector3(forwardVect.x, 0, forwardVect.z);
         Vector3 rightVect = Vector3.Cross(upVect, forwardVect).normalized;
-        
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        // if on ground
         if(state == "onGround") {
             if(Input.GetKeyDown("space") && canJump){
                 playerRB.velocity += new Vector3(0, jumpStrength, 0);
@@ -84,6 +87,12 @@ public class PlayerMovement : MonoBehaviour
                 (forwardVect * (vertical * speed * Time.deltaTime)) + 
                 (rightVect * (horizontal * speed * Time.deltaTime)) +
                 new Vector3(0, playerRB.velocity.y, 0);
+            if(vertical != 0 || horizontal != 0) {
+                animator.SetBool("isWalking", true);
+            } else {
+                animator.SetBool("isWalking", false);
+            } 
+        // if climbing 
         } else if(state == "climbing") {
             playerRB.velocity += new Vector3(0, climbSpeed * Time.deltaTime, 0);
         } else {
