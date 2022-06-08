@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform camTrans;
 
+    [SerializeField] private SurfUnder surfUnder;
+
     [SerializeField] private Animator animator;
 
     [SerializeField] private float speed = 10f;
@@ -22,10 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private string state = "falling";
 
-    private bool canJump = true;
+    //private bool canJump = true;
     private float lastJump;
-
-    [SerializeField] private bool canInfiniteJump = true;
 
     private GameObject surface = null;
     private Vector3 surfacePrevPos;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     void Start() {
         playerRB = GetComponent<Rigidbody>();
         upVect = new Vector3(0, 1, 0);
-        canJump = true;
+        //canJump = true;
         deltaSurf = Vector3.zero;
         lastJump = Time.time;
     }
@@ -45,24 +45,6 @@ public class PlayerMovement : MonoBehaviour
             //transform.SetParent(surface.transform);
             surfacePrevPos = surface.transform.position;
         }
-    }
-
-    void OnCollisionStay(Collision other) {
-        canJump = true;
-        state = "onGround";
-        //playerRB.useGravity = false;
-        // state = "climbing";
-    }
-
-    void OnCollisionExit(Collision other) {
-        if(other.gameObject == surface) {
-            surface = null;
-            //transform.SetParent(null);
-            canJump = canInfiniteJump;
-            state = "falling";
-        }
-        //playerRB.useGravity = true;
-
     }
 
     // Returns the amount moved by surface attached to
@@ -83,6 +65,11 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate() {
+        if(surfUnder.OnGround()) {
+            state = "onGround";
+        } else {
+            state = "falling";
+        }
         //transform.localScale = defaultScale;
 
         // using the camera determines forward and right direction
@@ -94,9 +81,8 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         // if on ground
         if(state == "onGround") {
-            if(Input.GetKey("space") && canJump && Time.time - lastJump > jumpDelay){
+            if(Input.GetKey("space") && Time.time - lastJump > jumpDelay){
                 playerRB.velocity += new Vector3(0, jumpStrength, 0);
-                canJump = canInfiniteJump;
                 lastJump = Time.time;
             }
             playerRB.velocity = 
