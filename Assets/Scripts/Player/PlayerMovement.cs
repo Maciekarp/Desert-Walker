@@ -11,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpStrength = 5f;
     [SerializeField] private float climbSpeed = 10f;
-    
+    [SerializeField] private float jumpDelay = 0.1f;
+
+
     private Rigidbody playerRB;
     private Vector3 upVect;
     
@@ -21,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private string state = "falling";
 
     private bool canJump = true;
+    private float lastJump;
+
     [SerializeField] private bool canInfiniteJump = true;
 
     private GameObject surface = null;
@@ -32,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         upVect = new Vector3(0, 1, 0);
         canJump = true;
         deltaSurf = Vector3.zero;
+        lastJump = Time.time;
     }
 
     void OnCollisionEnter(Collision other) {
@@ -60,14 +65,24 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
     // Returns the amount moved by surface attached to
     public Vector3 DeltaSurf() {
         return deltaSurf;
     }
 
-    // Update is called once per frame
     void Update() {
+        // Follows movement of surface
+        if(surface != null) {
+            deltaSurf = (surface.transform.position - surfacePrevPos);
+            transform.position += deltaSurf;
+            surfacePrevPos = surface.transform.position;
+        } else {
+            deltaSurf = Vector3.zero;
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate() {
         //transform.localScale = defaultScale;
 
         // using the camera determines forward and right direction
@@ -79,9 +94,10 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         // if on ground
         if(state == "onGround") {
-            if(Input.GetKeyDown("space") && canJump){
+            if(Input.GetKey("space") && canJump && Time.time - lastJump > jumpDelay){
                 playerRB.velocity += new Vector3(0, jumpStrength, 0);
                 canJump = canInfiniteJump;
+                lastJump = Time.time;
             }
             playerRB.velocity = 
                 (forwardVect * (vertical * speed * Time.deltaTime)) + 
@@ -100,15 +116,6 @@ public class PlayerMovement : MonoBehaviour
                 (forwardVect * (vertical * speed * Time.deltaTime)) + 
                 (rightVect * (horizontal * speed * Time.deltaTime)) +
                 new Vector3(0, playerRB.velocity.y, 0);
-        }
-
-        // Follows movement of surface
-        if(surface != null) {
-            deltaSurf = (surface.transform.position - surfacePrevPos);
-            transform.position += deltaSurf;
-            surfacePrevPos = surface.transform.position;
-        } else {
-            deltaSurf = Vector3.zero;
         }
     }
 }
